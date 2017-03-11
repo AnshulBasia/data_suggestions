@@ -18,8 +18,8 @@
 <script>
 var app = angular.module('myApp', []);
 var name = "<?php echo $_POST['name']; ?>";
-var api = "http://localhost:3000/api/anime/";
-var apiname = api.concat(id);
+var api = "http://localhost:3000/api/anime/name/";
+var apiname = api.concat(name);
 document.getElementById("id").innerHTML = name;
 app.controller('myCtrl', function($scope, $http) {
   $http.get(apiname).then(function (response) {

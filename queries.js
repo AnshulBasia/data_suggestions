@@ -13,7 +13,8 @@ var db = pgp(connectionString);
 
 module.exports = {
     getAnime: getAnime,
-    getAnimebyid: getAnimebyid
+    getAnimebyid: getAnimebyid,
+    getAnimebyname: getAnimebyname
     /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
@@ -60,9 +61,8 @@ function getAnimebyname(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  var name = req.params.id;
-  console.log("hi");
-  db.one('select * from anime where name = $1', name)
+  
+  db.any("select * from anime where name = $1",req.params.name)
     .then(function (data) {
       res.status(200)
         .json({
