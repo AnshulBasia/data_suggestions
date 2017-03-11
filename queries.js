@@ -16,7 +16,8 @@ module.exports = {
     getAnimebyid: getAnimebyid,
     getAnimebyname: getAnimebyname,
     getAnimebyrating: getAnimebyrating,
-    getAnimebyratingrange: getAnimebyratingrange
+    getAnimebyratingrange: getAnimebyratingrange,
+    getAnimebyepisodes: getAnimebyepisodes
     /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
@@ -99,6 +100,23 @@ function getAnimebyratingrange(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   
   db.any("select * from anime where rating > $1 AND rating <= $2",[req.params.high,req.params.low])
+    .then(function (data) {
+      res.status(200)
+        .json({
+          data: data
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function getAnimebyepisodes(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  
+  db.any("select * from anime where episodes > $1 AND episodes <= $2",[req.params.high,req.params.low])
     .then(function (data) {
       res.status(200)
         .json({

@@ -9,6 +9,7 @@ router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);
 router.get('/api/anime/rating/:high', db.getAnimebyrating);
 router.get('/api/anime/rating/:high/:low', db.getAnimebyratingrange);
+router.get('/api/anime/episodes/:high/:low', db.getAnimebyepisodes);
 /*SAMPLES
 router.get('/api/puppies', db.getAllPuppies);
 router.get('/api/puppies/:id', db.getSinglePuppy);
