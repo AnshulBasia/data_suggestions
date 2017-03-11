@@ -18,7 +18,8 @@ module.exports = {
     getAnimebyrating: getAnimebyrating,
     getAnimebyratingrange: getAnimebyratingrange,
     getAnimebyepisodes: getAnimebyepisodes,
-    getAnimebyepisodes_rating: getAnimebyepisodes_rating
+    getAnimebyepisodes_rating: getAnimebyepisodes_rating,
+    createanime: createanime
     /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
@@ -37,6 +38,18 @@ function getAnime(req, res, next) {
       res.status(200)
         .json({
           data: data,
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+    db.none("insert into anime(anime_id, name)" +
+      "values(0,'DBZ')",req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one puppy'
         });
     })
     .catch(function (err) {
@@ -139,6 +152,25 @@ function getAnimebyepisodes_rating(req, res, next) {
       res.status(200)
         .json({
           data: data
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function createanime(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+ 
+    db.none("insert into anime(anime_id, name, genre)" +
+      "values($1,$2,$3)",[req.params.id,req.params.name,req.params.genre])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one puppy'
         });
     })
     .catch(function (err) {

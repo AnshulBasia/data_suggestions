@@ -11,6 +11,7 @@ router.get('/api/anime/rating/:high', db.getAnimebyrating);
 router.get('/api/anime/rating/:high/:low', db.getAnimebyratingrange);
 router.get('/api/anime/episodes/:high/:low', db.getAnimebyepisodes);
 router.get('/api/anime/episodes_rating/:highe/:lowe/:highr/:lowr', db.getAnimebyepisodes_rating);
+router.get('/api/insert_anime/:id/:name/:genre', db.createanime);
 /*SAMPLES
 router.get('/api/puppies', db.getAllPuppies);
 router.get('/api/puppies/:id', db.getSinglePuppy);
