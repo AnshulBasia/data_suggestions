@@ -9,14 +9,14 @@ CREATE TABLE anime (
   name VARCHAR,
   genre VARCHAR,
   type VARCHAR,
-  episodes VARCHAR,
-  rating VARCHAR,
+  episodes INTEGER,
+  rating real,
   members VARCHAR
 );
 
 
 COPY anime(anime_id,name,genre,type,episodes,rating,members)
-FROM '/home/mukesh/Desktop/data_suggestions/Data/anime.csv'  DELIMITER ',' CSV HEADER;
+FROM '/home/mukesh/Desktop/Data/anime.csv'  DELIMITER ',' CSV HEADER;
 
 
 CREATE TABLE rating (
@@ -26,4 +26,4 @@ CREATE TABLE rating (
 );
 
 COPY rating(user_id,anime_id,rating)
-FROM '/home/mukesh/Desktop/data_suggestions/Data/rating.csv' DELIMITER ',' CSV HEADER;
+FROM '/home/mukesh/Desktop/Data/rating.csv' DELIMITER ',' CSV HEADER;
