@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php  echo $_POST["id"]; ?>
+<?php  echo $_POST["name"]; ?>
 
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -17,13 +17,12 @@
 
 <script>
 var app = angular.module('myApp', []);
-var id = "<?php echo $_POST['id']; ?>";
-//id=1;
+var name = "<?php echo $_POST['name']; ?>";
 var api = "http://localhost:3000/api/anime/";
-var apid = api.concat(id);
-document.getElementById("id").innerHTML = id;
+var apiname = api.concat(id);
+document.getElementById("id").innerHTML = name;
 app.controller('myCtrl', function($scope, $http) {
-  $http.get(apid).then(function (response) {
+  $http.get(apiname).then(function (response) {
       $scope.myData = response.data.data;
   });
 });
