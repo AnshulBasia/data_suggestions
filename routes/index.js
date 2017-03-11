@@ -7,6 +7,7 @@ var db = require('../queries');
 router.get('/api/anime', db.getAnime);
 router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);
+router.get('/api/anime/rating/:high', db.getAnimebyrating);
 /*SAMPLES
 router.get('/api/puppies', db.getAllPuppies);
 router.get('/api/puppies/:id', db.getSinglePuppy);

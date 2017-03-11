@@ -14,7 +14,8 @@ var db = pgp(connectionString);
 module.exports = {
     getAnime: getAnime,
     getAnimebyid: getAnimebyid,
-    getAnimebyname: getAnimebyname
+    getAnimebyname: getAnimebyname,
+    getAnimebyrating: getAnimebyrating
     /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
@@ -74,6 +75,22 @@ function getAnimebyname(req, res, next) {
     });
 }
 
+function getAnimebyrating(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  
+  db.any("select * from anime where rating >= $1",req.params.high)
+    .then(function (data) {
+      res.status(200)
+        .json({
+          data: data
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 /*SAMPLE QUERY functions
 function getAllPuppies(req, res, next) {
   db.any('select * from pups')
