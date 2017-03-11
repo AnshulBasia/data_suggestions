@@ -12,7 +12,8 @@ var db = pgp(connectionString);
 // add query functions
 
 module.exports = {
-    getAnime: getAnime
+    getAnime: getAnime,
+    getAnimebyid: getAnimebyid
     /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
@@ -38,6 +39,23 @@ function getAnime(req, res, next) {
     });
 }
 
+function getAnimebyid(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  var animeID = parseInt(req.params.id);
+  
+  db.one('select * from anime where anime_id = $1', animeID)
+    .then(function (data) {
+      res.status(200)
+        .json({
+          data: data
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 /*SAMPLE QUERY functions
 function getAllPuppies(req, res, next) {
@@ -55,21 +73,7 @@ function getAllPuppies(req, res, next) {
     });
 }
 
-function getSinglePuppy(req, res, next) {
-  var pupID = parseInt(req.params.id);
-  db.one('select * from pups where id = $1', pupID)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ONE puppy'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
+
 
 function createPuppy(req, res, next) {
   req.body.age = parseInt(req.body.age);
