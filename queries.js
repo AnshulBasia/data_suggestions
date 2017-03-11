@@ -1,12 +1,12 @@
 var promise = require('bluebird');
 
 var options = {
-  // Initialization Options
-  promiseLib: promise
+    // Initialization Options
+    promiseLib: promise
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://postgres:postgres@localhost:5432/anime';
+var connectionString = 'postgres://postgres:123456@localhost:5432/project';
 var db = pgp(connectionString);
 
 // add query functions
@@ -20,7 +20,7 @@ module.exports = {
     getAnimebyepisodes: getAnimebyepisodes,
     getAnimebyepisodes_rating: getAnimebyepisodes_rating,
     createanime: createanime
-    /*SAMPLES
+        /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
   createPuppy: createPuppy,
@@ -30,152 +30,142 @@ module.exports = {
 };
 
 function getAnime(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  db.any('select * from anime')
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data,
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('select * from anime')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-    db.none("insert into anime(anime_id, name)" +
-      "values(0,'DBZ')",req.body)
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Inserted one puppy'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+
 }
 
 function getAnimebyid(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  var animeID = parseInt(req.params.id);
-  
-  db.one('select * from anime where anime_id = $1', animeID)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    var animeID = parseInt(req.params.id);
+
+    db.one('select * from anime where anime_id = $1', animeID)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
+
 function getAnimebyname(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  db.any("select * from anime where name = $1",req.params.name)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where name = $1", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
 
 function getAnimebyrating(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  db.any("select * from anime where rating >= $1",req.params.high)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where rating >= $1", req.params.high)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
 
 function getAnimebyratingrange(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  db.any("select * from anime where rating > $1 AND rating <= $2",[req.params.high,req.params.low])
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where rating > $1 AND rating <= $2", [req.params.high, req.params.low])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
 
 function getAnimebyepisodes(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  db.any("select * from anime where episodes > $1 AND episodes <= $2",[req.params.high,req.params.low])
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where episodes > $1 AND episodes <= $2", [req.params.high, req.params.low])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
+
 function getAnimebyepisodes_rating(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  db.any("select * from anime where episodes > $1 AND episodes <= $2 AND rating >= $3 AND rating <= $4"
-                    ,[req.params.highe,req.params.lowe,req.params.highr,req.params.lowr])
-    .then(function (data) {
-      res.status(200)
-        .json({
-          data: data
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where episodes > $1 AND episodes <= $2 AND rating >= $3 AND rating <= $4", [req.params.highe, req.params.lowe, req.params.highr, req.params.lowr])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
 
 function createanime(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
- 
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
     db.none("insert into anime(anime_id, name, genre)" +
-      "values($1,$2,$3)",[req.params.id,req.params.name,req.params.genre])
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Inserted one puppy'
+            "values($1,$2,$3)", [req.params.id, req.params.name, req.params.genre])
+        .then(function() {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    message: 'Inserted one puppy'
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
 /*SAMPLE QUERY functions
 function getAllPuppies(req, res, next) {
