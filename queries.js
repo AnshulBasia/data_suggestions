@@ -12,6 +12,7 @@ var db = pgp(connectionString);
 // add query functions
 
 module.exports = {
+    //anime
     getAnime: getAnime,
     getAnimebyid: getAnimebyid,
     getAnimebyname: getAnimebyname,
@@ -19,14 +20,27 @@ module.exports = {
     getAnimebyratingrange: getAnimebyratingrange,
     getAnimebyepisodes: getAnimebyepisodes,
     getAnimebyepisodes_rating: getAnimebyepisodes_rating,
-    createanime: createanime
-        /*SAMPLES
+    createanime: createanime,
+
+    // movies
+    getMovies: getMovies,
+    /*getAnimebyid: getAnimebyid,
+    getAnimebyname: getAnimebyname,
+    getAnimebyrating: getAnimebyrating,
+    getAnimebyratingrange: getAnimebyratingrange,
+    getAnimebyepisodes: getAnimebyepisodes,
+    getAnimebyepisodes_rating: getAnimebyepisodes_rating,
+    createanime: createanime*/
+    /*SAMPLES
   getAllPuppies: getAllPuppies,
   getSinglePuppy: getSinglePuppy,
   createPuppy: createPuppy,
   updatePuppy: updatePuppy,
   removePuppy: removePuppy
   */
+    // IPL
+    getTeams: getTeams
+
 };
 
 function getAnime(req, res, next) {
@@ -43,7 +57,6 @@ function getAnime(req, res, next) {
         .catch(function(err) {
             return next(err);
         });
-
 }
 
 function getAnimebyid(req, res, next) {
@@ -167,6 +180,46 @@ function createanime(req, res, next) {
             return next(err);
         });
 }
+
+// Movie Queries
+function getMovies(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('select * from movies')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+
+
+//IPL Queries
+function getTeams(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('select distinct(team1) as team from matches')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+
 /*SAMPLE QUERY functions
 function getAllPuppies(req, res, next) {
   db.any('select * from pups')
