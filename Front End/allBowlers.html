@@ -5,28 +5,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <head>
-    <title>IPL Teams</title>
+    <title>Bowlers</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
 <body>
-    <h2>Team Names</h2>
+    <h2>Bowlers</h2>
     <div ng-app="myApp" ng-controller="myCtrl">
 
-        <ul>
-            <li ng-repeat="x in myData">
-                {{ x.team }}
-            </li>
-        </ul>
+        <table>
+            <tr ng-repeat="x in names">
+                <td>{{ x.name }}</td>
+                <td>{{ x.matches }}</td>
+                <td>{{ x.wickets }}</td>
+                <td>{{ x.avg }}</td>
+                <td>{{ x.econ }}</td>
+                <td>{{ x.best}}</td>
+            </tr>
+        </table>
 
     </div>
 
     <script>
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope, $http) {
-            $http.get("http://localhost:3000/api/ipl/teams").then(function(response) {
+            $http.get("http://localhost:3000/api/ipl/bowlers").then(function(response) {
                 $scope.myData = response.data.data;
             });
         });

@@ -39,8 +39,9 @@ module.exports = {
   removePuppy: removePuppy
   */
     // IPL
-    getTeams: getTeams
-
+    getTeams: getTeams,
+    getBatsmen: getBatsmen,
+    getBowlers: getBowlers
 };
 
 function getAnime(req, res, next) {
@@ -207,6 +208,40 @@ function getTeams(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     db.any('select distinct(team1) as team from matches')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBatsmen(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('select * from batsmen')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBowlers(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('select * from bowlers')
         .then(function(data) {
             res.status(200)
                 .json({
