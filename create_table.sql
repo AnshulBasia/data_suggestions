@@ -41,7 +41,7 @@ CREATE TABLE MOVIES(
 	actor_2_facebook_likes int,
 	imdb_score real,
 	aspect_ratio real,
-	movie_facebook_likes int,
+	movie_facebook_likes int
 );
 
 COPY MOVIES 
@@ -99,3 +99,29 @@ CREATE TABLE DELIVERIES(
 
 COPY DELIVERIES
 FROM '/home/sahil/Downloads/project/deliveries.csv' DELIMITER ',' CSV ;
+
+DROP MATERIALIZED VIEW IF EXISTS BATSMEN;
+CREATE MATERIALIZED VIEW BATSMEN AS
+SELECT
+	batsman as name,
+	count(distinct match_id) as matches_played,
+	sum(batsman_runs) as runs_scored,
+	count(over) as balls_faced,
+	sum(batsman_runs*100)::numeric /count(over)::numeric as strike_rate,
+	sum(batsman_runs)::numeric/(count(player_dismissed = batsman)+1)::numeric as avg
+	from deliveries group by batsman
+	order by runs_scored desc;
+
+
+DROP MATERIALIZED VIEW IF EXISTS BOWLERS;
+CREATE MATERIALIZED VIEW BOWLERS AS
+SELECT
+	bowler as name,
+	count(distinct match_id) as matches_played,
+	sum(batsman_runs) as runs,
+	count(over) as balls,
+	sum(batsman_runs*6)::numeric /count(over)::numeric as econ,
+	count(player_dismissed = batsman AND bowler=bowler) as wickets,
+	count(over)::numeric/(count(player_dismissed = batsman AND bowler=bowler)+0.0001)::numeric as avg
+	from deliveries group by bowler
+	order by wickets desc;

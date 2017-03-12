@@ -5,14 +5,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <body>
-
+    <h2> Movie Titles</h2>
     <div ng-app="myApp" ng-controller="myCtrl">
 
-        <ul>
-            <li ng-repeat="x in myData">
-                {{ x.movie_title }}
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <td>{{ movie_title }}</td>
+                <td>{{ title_year }}</td>
+                <td>{{ actor_1_name }}</td>
+                <td>{{ actor_2_name }}</td>
+                <td>{{ actor_3_name }}</td>
+                <td>{{ imdb_score }}</td>
+            </tr>
+            <tr ng-repeat="x in myData">
+                <td>{{ x.movie_title }}</td>
+                <td>{{ x.title_year }}</td>
+                <td>{{ x.actor_1_name }}</td>
+                <td>{{ x.actor_2_name }}</td>
+                <td>{{ x.actor_3_name }}</td>
+                <td>{{ x.imdb_score }}</td>
+            </tr>
+        </table>
 
     </div>
 

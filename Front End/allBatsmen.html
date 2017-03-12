@@ -12,19 +12,28 @@
 </head>
 
 <body>
-    <h2>Team Names</h2>
     <div ng-app="myApp" ng-controller="myCtrl">
-
+        <h2>Batsmen</h2>
         <table>
-            <tr ng-repeat="x in names">
-                <td>{{ x.name }}</td>
-                <td>{{ x.matches }}</td>
-                <td>{{ x.runs }}</td>
-                <td>{{ x.avg }}</td>
-                <td>{{ x.half_centuries }}</td>
-                <td>{{ x.centuries}}</td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ matches_played }}</td>
+                    <td>{{ avg }}</td>
+                    <td>{{ strike_rate}}</td>
+                    <td>{{ runs_scored }}</td>
+                    <td>{{ balls_faced }}</td>
+                </tr>
+                <tr ng-repeat="x in myData">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.matches_played }}</td>
+                    <td>{{ x.avg }}</td>
+                    <td>{{ x.strike_rate}}</td>
+                    <td>{{ x.runs_scored }}</td>
+                    <td>{{ x.balls_faced }}</td>
+
+                </tr>
+            </table>
 
     </div>
 

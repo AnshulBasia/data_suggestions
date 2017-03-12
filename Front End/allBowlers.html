@@ -16,15 +16,27 @@
     <div ng-app="myApp" ng-controller="myCtrl">
 
         <table>
-            <tr ng-repeat="x in names">
-                <td>{{ x.name }}</td>
-                <td>{{ x.matches }}</td>
-                <td>{{ x.wickets }}</td>
-                <td>{{ x.avg }}</td>
-                <td>{{ x.econ }}</td>
-                <td>{{ x.best}}</td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ matches_played }}</td>
+                    <td>{{ wickets }}</td>
+                    <td>{{ avg }}</td>
+                    <td>{{ econ}}</td>
+                    <td>{{ runs }}</td>
+                    <td>{{ balls }}</td>
+                </tr>
+                <tr ng-repeat="x in myData">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.matches_played }}</td>
+                    <td>{{ x.wickets }}</td>
+                    <td>{{ x.avg }}</td>
+                    <td>{{ x.econ}}</td>
+                    <td>{{ x.runs }}</td>
+                    <td>{{ x.balls }}</td>
+
+                </tr>
+            </table>
 
     </div>
 
