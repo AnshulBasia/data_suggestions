@@ -16,66 +16,41 @@
     <br>
     <div class="container">
         <ul>
-            <li><a href="allBatsmen.html">All batsmen statistics</a></li>
+            <li><a href="allBowlers.html">All bowling statistics</a></li>
+
             <li>
                 <div ng-app="">
-                    <form action="anime_by_id.php" method="post">
-                        Anime id: <input type="text" ng-model="id" name="id">
+                    <form action="bowler_details.php" method="post">
+                        Bowler name: <input type="text" ng-model="id" name="name">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_name.php" method="post">
-                        Anime name: <input type="text" ng-model="id" name="name">
+                    <form action="bowlers_by_wickets.php" method="post">
+                        Bowlers with Wickets greater than or equal to: <input type="text" ng-model="id" name="wickets">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_rating.php" method="post">
-                        Anime with rating greater than: <input type="text" ng-model="id" name="rating">
+                    <form action="bowlers_by_avg.php" method="post">
+                        Bowlers with avg less than or equal to: <input type="text" ng-model="id" name="avg">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_ratingrange.php" method="post">
-                        Anime with rating range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
+                    <form action="bowlers_by_econ.php" method="post">
+                        Bowlers with econ less than or equal to: <input type="text" ng-model="id" name="econ">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_episodes.php" method="post">
-                        Anime with episodes range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_episodes_rating.php" method="post">
-                        Anime with episodes <br> greater than: <input type="text" ng-model="id" name="lowe"><br> lesser than: <input type="text" ng-model="id" name="highe"><br> rating<br> greater than
-                        <input type="text" ng-model="id" name="lowr"><br> less than
-                        <input type="text" ng-model="id" name="highr">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                INSERT ANIME
-                <div ng-app="">
-                    <form action="insert_anime.php" method="post">
-                        id: <input type="text" ng-model="id" name="id"><br> Name: <input type="text" ng-model="id" name="name"><br> Genre: <input type="text" ng-model="id" name="genre"><br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
+
         </ul>
     </div>
 

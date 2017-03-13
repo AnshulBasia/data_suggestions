@@ -43,6 +43,13 @@ module.exports = {
     getBatsmen: getBatsmen,
     getBowlers: getBowlers,
     getBatsman: getBatsman,
+    getBowler: getBowler,
+    getBatsmenByRuns: getBatsmenByRuns,
+    getBowlersByWickets: getBowlersByWickets,
+    getBatsmenByAvg: getBatsmenByAvg,
+    getBatsmenByStrikeRate: getBatsmenByStrikeRate,
+    getBowlersByEcon: getBowlersByEcon,
+    getBowlersByAvg: getBowlersByAvg
 };
 
 function getAnime(req, res, next) {
@@ -289,6 +296,107 @@ function getBowler(req, res, next) {
 
 }
 
+function getBatsmenByRuns(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from batsmen where runs_scored >= $1", req.params.runs)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBowlersByWickets(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from bowlers where wickets >= $1", req.params.wickets)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBatsmenByAvg(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from batsmen where avg >= $1 order by avg desc", req.params.avg)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBatsmenByStrikeRate(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from batsmen where strike_rate >= $1 order by strike_rate desc", req.params.strike_rate)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBowlersByAvg(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from bowlers where avg <= $1 and wickets >= 10 order by avg", req.params.avg)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBowlersByEcon(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from bowlers where econ <= $1 and wickets >= 10 order by econ", req.params.econ)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
 
 /*SAMPLE QUERY functions
 function getAllPuppies(req, res, next) {

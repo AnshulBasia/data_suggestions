@@ -31,6 +31,13 @@ router.get('/api/ipl/batsmen', db.getBatsmen);
 router.get('/api/ipl/bowlers', db.getBowlers);
 router.get('/api/ipl/batsman/:name', db.getBatsman);
 router.get('/api/ipl/bowler/:name', db.getBowler);
+router.get('/api/ipl/batsman/runs/:runs', db.getBatsmenByRuns);
+router.get('/api/ipl/bowler/wickets/:wickets', db.getBowlersByWickets);
+router.get('/api/ipl/batsman/avg/:avg', db.getBatsmenByAvg);
+router.get('/api/ipl/batsman/strike_rate/:strike_rate', db.getBatsmenByStrikeRate);
+router.get('/api/ipl/bowler/avg/:avg', db.getBowlersByAvg);
+router.get('/api/ipl/bowler/econ/:econ', db.getBowlersByEcon);
+
 /*router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);
 router.get('/api/anime/rating/:high', db.getAnimebyrating);

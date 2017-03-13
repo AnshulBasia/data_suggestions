@@ -28,47 +28,29 @@
 
             <li>
                 <div ng-app="">
-                    <form action="anime_by_rating.php" method="post">
-                        Anime with rating greater than: <input type="text" ng-model="id" name="rating">
+                    <form action="batsmen_by_runs.php" method="post">
+                        Batsmen with runs greater than oe equal to: <input type="text" ng-model="id" name="runs">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_ratingrange.php" method="post">
-                        Anime with rating range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
+                    <form action="batsmen_by_avg.php" method="post">
+                        Batsmen with avg greater than or equal to: <input type="text" ng-model="id" name="avg">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_episodes.php" method="post">
-                        Anime with episodes range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
+                    <form action="batsmen_by_strike_rate.php" method="post">
+                        Batsmen with strike rate greater than oe equal to: <input type="text" ng-model="id" name="strike_rate">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_episodes_rating.php" method="post">
-                        Anime with episodes <br> greater than: <input type="text" ng-model="id" name="lowe"><br> lesser than: <input type="text" ng-model="id" name="highe"><br> rating<br> greater than
-                        <input type="text" ng-model="id" name="lowr"><br> less than
-                        <input type="text" ng-model="id" name="highr">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                INSERT ANIME
-                <div ng-app="">
-                    <form action="insert_anime.php" method="post">
-                        id: <input type="text" ng-model="id" name="id"><br> Name: <input type="text" ng-model="id" name="name"><br> Genre: <input type="text" ng-model="id" name="genre"><br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
+
         </ul>
     </div>
 
