@@ -4,18 +4,24 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
+<head>
+    <title>Movies</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+</head>
+
 <body>
     <h2> Movie Titles</h2>
     <div ng-app="myApp" ng-controller="myCtrl">
 
         <table>
             <tr>
-                <td>{{ movie_title }}</td>
-                <td>{{ title_year }}</td>
-                <td>{{ actor_1_name }}</td>
-                <td>{{ actor_2_name }}</td>
-                <td>{{ actor_3_name }}</td>
-                <td>{{ imdb_score }}</td>
+                <th>movie_title</th>
+                <th>title_year</th>
+                <th>actor_1_name</th>
+                <th>actor_2_name</th>
+                <th>actor_3_name</th>
+                <th>imdb_score</th>
             </tr>
             <tr ng-repeat="x in myData">
                 <td>{{ x.movie_title }}</td>

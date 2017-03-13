@@ -107,8 +107,8 @@ SELECT
 	count(distinct match_id) as matches_played,
 	sum(batsman_runs) as runs_scored,
 	count(over) as balls_faced,
-	sum(batsman_runs*100)::numeric /count(over)::numeric as strike_rate,
-	sum(batsman_runs)::numeric/(count(player_dismissed = batsman)+1)::numeric as avg
+	ROUND(sum(batsman_runs*100)::numeric /count(over)::numeric,2) as strike_rate,
+	ROUND(sum(batsman_runs)::numeric/(count(player_dismissed = batsman)+1)::numeric,2) as avg
 	from deliveries group by batsman
 	order by runs_scored desc;
 
@@ -120,8 +120,18 @@ SELECT
 	count(distinct match_id) as matches_played,
 	sum(batsman_runs) as runs,
 	count(over) as balls,
-	sum(batsman_runs*6)::numeric /count(over)::numeric as econ,
-	count(player_dismissed = batsman AND bowler=bowler) as wickets,
-	count(over)::numeric/(count(player_dismissed = batsman AND bowler=bowler)+0.0001)::numeric as avg
+	ROUND(sum(batsman_runs*6)::numeric /count(over)::numeric,2) as econ,
+	count(player_dismissed = batsman AND bowler=bowler AND dismissal_kind != 'run out') as wickets,
+	ROUND(count(over)::numeric/(count(player_dismissed = batsman AND bowler=bowler)+0.0001)::numeric,2) as avg
 	from deliveries group by bowler
 	order by wickets desc;
+
+DROP VIEW IF EXISTS team_stats;
+CREATE VIEW team_stats as 
+SELECT winners.name, table1.matches+table2.matches as matches, winners.won as won, table4.matches+table3.matches - winners.won as lost,table1.matches+table2.matches-table4.matches-table3.matches as draw from
+(SELECT team1 as name,count(id) as matches from matches group by team1) as table1,
+(SELECT team2 as name,count(id) as matches from matches group by team2) as table2,
+(SELECT team1 as name,count(id) as matches from matches where result = 'normal' group by team1) as table3,
+(SELECT team2 as name,count(id) as matches from matches where result = 'normal' group by team2) as table4,
+(SELECT winner as name,count(id) as won from matches group by winner) as winners
+WHERE winners.name = table1.name and table1.name = table2.name and table1.name = table3.name and table4.name = table1.name order by name ;

@@ -41,7 +41,8 @@ module.exports = {
     // IPL
     getTeams: getTeams,
     getBatsmen: getBatsmen,
-    getBowlers: getBowlers
+    getBowlers: getBowlers,
+    getBatsman: getBatsman,
 };
 
 function getAnime(req, res, next) {
@@ -207,7 +208,7 @@ function getTeams(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    db.any('select distinct(team1) as team from matches')
+    db.any('select * from team_stats')
         .then(function(data) {
             res.status(200)
                 .json({
@@ -242,6 +243,40 @@ function getBowlers(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     db.any('select * from bowlers')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBatsman(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from batsmen where name = $1", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBowler(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from bowlers where name = $1", req.params.name)
         .then(function(data) {
             res.status(200)
                 .json({

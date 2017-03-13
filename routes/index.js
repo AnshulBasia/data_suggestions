@@ -29,7 +29,8 @@ router.get('/api/insert_movies/:id/:name/:genre', db.createanime);
 router.get('/api/ipl/teams', db.getTeams);
 router.get('/api/ipl/batsmen', db.getBatsmen);
 router.get('/api/ipl/bowlers', db.getBowlers);
-
+router.get('/api/ipl/batsman/:name', db.getBatsman);
+router.get('/api/ipl/bowler/:name', db.getBowler);
 /*router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);
 router.get('/api/anime/rating/:high', db.getAnimebyrating);
