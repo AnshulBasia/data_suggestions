@@ -1,0 +1,19 @@
+MOVIES:
+
+1. Get movies by name of director.
+2. Get movies by range on numof critic reviews.
+3. Get movies by duration range.
+4. Get movies by actor name.
+5. Get movies by genre.
+6. Get movies by range of imdb score.
+7. Get movies by language.
+8. Get movies by facebook likes(if possible).
+
+IPL:
+
+1. Get matches of a particular team.
+2. Get matches by player of the match.
+3. Get matches within date range (if possible).
+4. Get match in which user's favorite batsman scored maximum runs.
+5. Get match in which user's favourite bowler took maximum wickets.
+6. Get matches of a particular venue/city.
