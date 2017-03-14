@@ -10,7 +10,7 @@ CREATE TABLE ANIME(
 	PRIMARY KEY(anime_id)
 );
 COPY ANIME 
-FROM '/home/sahil/Downloads/project/anime.csv' DELIMITER ',' CSV ;
+FROM '/home/mukesh/Downloads/project/anime.csv' DELIMITER ',' CSV ;
 
 DROP TABLE IF EXISTS MOVIES;
 CREATE TABLE MOVIES(
@@ -45,7 +45,7 @@ CREATE TABLE MOVIES(
 );
 
 COPY MOVIES 
-FROM '/home/sahil/Downloads/project/movie_metadata.csv' DELIMITER ',' CSV ;
+FROM '/home/mukesh/Downloads/project/movie_metadata.csv' DELIMITER ',' CSV ;
 
 DROP TABLE IF EXISTS MATCHES;
 CREATE TABLE MATCHES(
@@ -70,7 +70,7 @@ CREATE TABLE MATCHES(
 );
 
 COPY MATCHES 
-FROM '/home/sahil/Downloads/project/matches.csv' DELIMITER ',' CSV ;
+FROM '/home/mukesh/Downloads/project/matches.csv' DELIMITER ',' CSV ;
 
 DROP TABLE IF EXISTS DELIVERIES;
 CREATE TABLE DELIVERIES(
@@ -98,7 +98,7 @@ CREATE TABLE DELIVERIES(
 );
 
 COPY DELIVERIES
-FROM '/home/sahil/Downloads/project/deliveries.csv' DELIMITER ',' CSV ;
+FROM '/home/mukesh/Downloads/project/deliveries.csv' DELIMITER ',' CSV ;
 
 DROP MATERIALIZED VIEW IF EXISTS BATSMEN;
 CREATE MATERIALIZED VIEW BATSMEN AS

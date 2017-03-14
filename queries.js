@@ -6,7 +6,7 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://postgres:123456@localhost:5432/project';
+var connectionString = 'postgres://postgres:postgres@localhost:5432/anime';
 var db = pgp(connectionString);
 
 // add query functions
@@ -128,7 +128,7 @@ function getAnimebyrating(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    db.any("select * from anime where rating >= $1", req.params.high)
+    db.any("select * from anime where rating >= $1 order by rating", req.params.high)
         .then(function(data) {
             res.status(200)
                 .json({
@@ -145,7 +145,7 @@ function getAnimebyratingrange(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    db.any("select * from anime where rating > $1 AND rating <= $2", [req.params.high, req.params.low])
+    db.any("select * from anime where rating > $1 AND rating <= $2 order by rating" , [req.params.high, req.params.low])
         .then(function(data) {
             res.status(200)
                 .json({
@@ -162,7 +162,7 @@ function getAnimebyepisodes(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    db.any("select * from anime where episodes > $1 AND episodes <= $2", [req.params.high, req.params.low])
+    db.any("select * from anime where episodes > $1 AND episodes <= $2 order by episodes", [req.params.high, req.params.low])
         .then(function(data) {
             res.status(200)
                 .json({
@@ -233,7 +233,7 @@ function getMoviebyname(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    db.any("select * from movies where movie_title = $1", req.params.name)
+    db.any("select * from movies where strpos(movie_title,$1)>0", req.params.name)
         .then(function(data) {
             res.status(200)
                 .json({

@@ -30,7 +30,7 @@ var budget = "<?php echo $_POST['budget']; ?>";
 var gross = "<?php echo $_POST['gross']; ?>";
 
 var api = "http://localhost:3000/api/insert_movie/";
-apid = api + name + "/" + genre + "/" + year + "/" + director +/" + actor1+ "/" + actor2+ "/" + actor3+ "/" + imdb+ "/" + budget+ "/" + gross ;
+apid = api + name + "/" + genre + "/" + year + "/" + director +"/" + actor1+ "/" + actor2+ "/" + actor3+ "/" + imdb+ "/" + budget+ "/" + gross ;
 document.getElementById("id").innerHTML = apid;
 app.controller('myCtrl', function($scope, $http) {
   $http.get(apid).then(function (response) {
