@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Data Suggestions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Choose one</h1>
+        <ul>
+            <li><a href="movie_names.html">Get all movies</a></li>
+            <li>
+                <div ng-app="">
+                    <form action="movie_by_name.php" method="post">
+                        Movie name: <input type="text" ng-model="id" name="name">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_actor.php" method="post">
+                        Actor name: <input type="text" ng-model="id" name="actor">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_director.php" method="post">
+                        Director name: <input type="text" ng-model="id" name="director">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_genre.php" method="post">
+                        Genre: <input type="text" ng-model="id" name="genre">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_budget.php" method="post">
+                        Movies with budget in range : <input type="text" ng-model="id" name="budget_low"> -- <input type="text" ng-model="id" name="budget_high">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_gross.php" method="post">
+                        Movie with gross collections in range: <input type="text" ng-model="id" name="gross_low"> -- <input type="text" ng-model="id" name="gross_high">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="movies_by_imdb_score.php" method="post">
+                        Movie with imdb score in range: <input type="text" ng-model="id" name="imdb_low"> -- <input type="text" ng-model="id" name="imdb_high">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                INSERT MOVIE
+
+                <div ng-app="">
+                    <form action="insert_movie.php" method="post">
+                        Name: <input type="text" ng-model="id" name="name"><br> Genre: <input type="text" ng-model="id" name="genre"><br> year: <input type="text" ng-model="id" name="year"><br>director: <input type="text" ng-model="id" name="director"><br>                        actor1: <input type="text" ng-model="id" name="actor1"><br> actor2: <input type="text" ng-model="id" name="actor2"><br> actor3: <input type="text" ng-model="id" name="actor3"><br> imdb: <input type="text" ng-model="id" name="imdb"><br>                        budget: <input type="text" ng-model="id" name="budget"><br> gross: <input type="text" ng-model="id" name="gross"><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+</body>
+
+</html>

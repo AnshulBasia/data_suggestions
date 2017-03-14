@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Data Suggestions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+    <br>
+    <br>
+    <div class="container">
+        <ul>
+            <li><a href="allBatsmen.html">All batsmen statistics</a></li>
+            <li><a href="batsmen_by_six.html">All batsmen ordered by number of 6's</a></li>
+            <li><a href="batsmen_by_four.html">All batsmen ordered by number of 4's</a></li>
+            <li>
+                <div ng-app="">
+                    <form action="batsman_details.php" method="post">
+                        Batsman Name: <input type="text" ng-model="id" name="name">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+
+            <li>
+                <div ng-app="">
+                    <form action="batsmen_by_runs.php" method="post">
+                        Batsmen with runs greater than or equal to: <input type="text" ng-model="id" name="runs">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="batsmen_by_avg.php" method="post">
+                        Batsmen with avg greater than or equal to: <input type="text" ng-model="id" name="avg">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
+                    <form action="batsmen_by_strike_rate.php" method="post">
+                        Batsmen with strike rate greater than or equal to: <input type="text" ng-model="id" name="strike_rate">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+
+</body>
+
+</html>
