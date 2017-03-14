@@ -29,7 +29,10 @@ router.get('/api/insert_movie/:name/:genre/:year/:director/:actor1/:actor2/:acto
 
 router.get('/api/ipl/teams', db.getTeams);
 router.get('/api/ipl/batsmen', db.getBatsmen);
+router.get('/api/ipl/batsmen/six', db.getBatsmenbySix);
+router.get('/api/ipl/batsmen/four', db.getBatsmenbyFour);
 router.get('/api/ipl/bowlers', db.getBowlers);
+router.get('/api/ipl/season/:season', db.getTeamsBySeason);
 router.get('/api/ipl/batsman/:name', db.getBatsman);
 router.get('/api/ipl/bowler/:name', db.getBowler);
 router.get('/api/ipl/batsman/runs/:runs', db.getBatsmenByRuns);

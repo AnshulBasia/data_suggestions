@@ -37,9 +37,12 @@ module.exports = {
     // IPL
     getTeams: getTeams,
     getBatsmen: getBatsmen,
+    getBatsmenbySix: getBatsmenbySix,
+    getBatsmenbyFour: getBatsmenbyFour,
     getBowlers: getBowlers,
     getBatsman: getBatsman,
     getBowler: getBowler,
+    getTeamsBySeason: getTeamsBySeason,
     getBatsmenByRuns: getBatsmenByRuns,
     getBowlersByWickets: getBowlersByWickets,
     getBatsmenByAvg: getBatsmenByAvg,
@@ -400,6 +403,40 @@ function getBatsmen(req, res, next) {
 
 }
 
+function getBatsmenbySix(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('SELECT * FROM BATSMEN JOIN SIX ON batsmen.name = six.batsman order by num_six desc')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getBatsmenbyFour(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any('SELECT * FROM BATSMEN INNER JOIN Four ON batsmen.name = four.batsman order by num_fours desc')
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
 function getBowlers(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -439,6 +476,24 @@ function getBowler(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     db.any("select * from bowlers where name = $1", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getTeamsBySeason(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    var season = parseInt(req.params.season);
+    db.any("select * from season_stats where season = $1", season)
         .then(function(data) {
             res.status(200)
                 .json({

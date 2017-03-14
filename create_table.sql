@@ -109,7 +109,7 @@ SELECT
 	count(over) as balls_faced,
 	ROUND(sum(batsman_runs*100)::numeric /count(over)::numeric,2) as strike_rate,
 	ROUND(sum(batsman_runs)::numeric/(count(player_dismissed = batsman)+1)::numeric,2) as avg
-	from deliveries group by batsman
+	from deliveries group by batsman 
 	order by runs_scored desc;
 
 
@@ -135,6 +135,27 @@ SELECT winners.name, table1.matches+table2.matches as matches, winners.won as wo
 (SELECT team2 as name,count(id) as matches from matches where result = 'normal' group by team2) as table4,
 (SELECT winner as name,count(id) as won from matches group by winner) as winners
 WHERE winners.name = table1.name and table1.name = table2.name and table1.name = table3.name and table4.name = table1.name order by name ;
+
+DROP VIEW IF EXISTS season_stats;
+CREATE VIEW season_stats as 
+SELECT winners.name as name,winners.season as season, table1.matches+table2.matches as matches, winners.won as won, table4.matches+table3.matches - winners.won as lost,table1.matches+table2.matches-table4.matches-table3.matches as draw from
+(SELECT team1 as name, season, count(id) as matches from matches group by team1,season) as table1,
+(SELECT team2 as name, season, count(id) as matches from matches group by team2,season) as table2,
+(SELECT team1 as name, season, count(id) as matches from matches where result = 'normal' group by team1,season) as table3,
+(SELECT team2 as name, season, count(id) as matches from matches where result = 'normal' group by team2,season) as table4,
+(SELECT winner as name,season, count(id) as won from matches group by winner,season) as winners
+WHERE winners.name = table1.name and table1.name = table2.name and table1.name = table3.name and table4.name = table1.name 
+ and winners.season = table1.season and table1.season = table2.season and table1.season = table3.season and table4.season = table1.season order by name ;
+
+CREATE VIEW SIX AS
+SELECT batsman, count(over) as num_six 
+from deliveries where batsman_runs = 6 
+group by batsman order by num_six; 
+
+CREATE VIEW FOUR AS
+SELECT batsman, count(over) as num_fours 
+from deliveries where batsman_runs = 4  
+group by batsman order by num_fours; 
 
 DROP MATERIALIZED VIEW IF EXISTS BATSMEN_MATCHES;
 CREATE MATERIALIZED VIEW BATSMEN_MATCHES AS
