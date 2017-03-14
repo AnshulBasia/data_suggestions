@@ -10,6 +10,7 @@
 <h3 id="id"></h3>
 <div ng-app="myApp" ng-controller="myCtrl"> 
 
+
         <table>
             <tr>
                 <th>id</th>
@@ -28,16 +29,19 @@
         </table>
 </div>
 
+
+
 <script>
 var app = angular.module('myApp', []);
-var id = "<?php echo $_POST['id']; ?>";
-//id=1;
-var api = "http://localhost:3000/api/anime/";
-var apid = api.concat(id);
-document.getElementById("id").innerHTML = "Anime with id " + id;
+var genre = "<?php echo $_POST['genre']; ?>";
+//name="V Kohli";
+var api = "http://localhost:3000/api/anime/genre/";
+var apid = api.concat(genre);
+
+document.getElementById("id").innerHTML = "Following anime have genre "+genre;
 app.controller('myCtrl', function($scope, $http) {
   $http.get(apid).then(function (response) {
-      $scope.myData = response.data;
+      $scope.myData = response.data.data;
   });
 });
 </script>

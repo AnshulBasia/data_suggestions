@@ -4,7 +4,7 @@ MOVIES:
 2. Get movies by range on numof critic reviews.
 3. Get movies by duration range. //not necessary i think
 4. Get movies by actor name. Done
-5. Get movies by genre. //imp
+5. Get movies by genre. //imp Done
 6. Get movies by range of imdb score. Done
 7. Get movies by language.
 8. Get movies by facebook likes(if possible).

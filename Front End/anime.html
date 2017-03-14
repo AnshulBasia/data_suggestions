@@ -56,6 +56,14 @@
             </li>
             <li>
                 <div ng-app="">
+                    <form action="anime_by_genre.php" method="post">
+                        Anime genre: <input type="text" ng-model="id" name="genre">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
                     <form action="anime_by_rating.php" method="post">
                         Anime with rating greater than: <input type="text" ng-model="id" name="rating">
                         <input type="submit" value="Submit">

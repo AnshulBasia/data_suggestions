@@ -16,6 +16,7 @@ module.exports = {
     getAnime: getAnime,
     getAnimebyid: getAnimebyid,
     getAnimebyname: getAnimebyname,
+    getAnimebyGenre: getAnimebyGenre,
     getAnimebyrating: getAnimebyrating,
     getAnimebyratingrange: getAnimebyratingrange,
     getAnimebyepisodes: getAnimebyepisodes,
@@ -27,6 +28,7 @@ module.exports = {
     getMoviebyname: getMoviebyname,
     getMoviebyDirector: getMoviebyDirector,
     getMoviebyActor: getMoviebyActor,
+    getMoviesbyGenre: getMoviesbyGenre,
     getMoviesbyBudget: getMoviesbyBudget,
     getMoviesbyGross: getMoviesbyGross,
     getMoviesbyRating: getMoviesbyRating,
@@ -99,6 +101,24 @@ function getAnimebyname(req, res, next) {
             return next(err);
         });
 }
+
+function getAnimebyGenre(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from anime where strpos(genre,$1) > 0", req.params.genre)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
 
 function getAnimebyrating(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -245,6 +265,24 @@ function getMoviebyActor(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
     db.any("select * from movies where actor_1_name = $1 or actor_2_name = $1 or actor_3_name = $1", req.params.actor)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+
+function getMoviesbyGenre(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where strpos(genres,$1) > 0", req.params.genre)
         .then(function(data) {
             res.status(200)
                 .json({

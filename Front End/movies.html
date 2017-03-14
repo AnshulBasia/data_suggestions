@@ -43,6 +43,14 @@
             </li>
             <li>
                 <div ng-app="">
+                    <form action="movies_by_genre.php" method="post">
+                        Genre: <input type="text" ng-model="id" name="genre">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div ng-app="">
                     <form action="movies_by_budget.php" method="post">
                         Movies with budget in range : <input type="text" ng-model="id" name="budget_low"> -- <input type="text" ng-model="id" name="budget_high">
                         <input type="submit" value="Submit">

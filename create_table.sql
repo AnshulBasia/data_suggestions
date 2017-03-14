@@ -135,3 +135,13 @@ SELECT winners.name, table1.matches+table2.matches as matches, winners.won as wo
 (SELECT team2 as name,count(id) as matches from matches where result = 'normal' group by team2) as table4,
 (SELECT winner as name,count(id) as won from matches group by winner) as winners
 WHERE winners.name = table1.name and table1.name = table2.name and table1.name = table3.name and table4.name = table1.name order by name ;
+
+DROP MATERIALIZED VIEW IF EXISTS BATSMEN_MATCHES;
+CREATE MATERIALIZED VIEW BATSMEN_MATCHES AS
+SELECT match_id, batsman, sum(batsman_runs) as runs, count(over) as balls
+FROM deliveries group by match_id,batsman order by runs;
+
+DROP MATERIALIZED VIEW IF EXISTS BOWLERS_MATCHES ;
+CREATE MATERIALIZED VIEW BOWLERS_MATCHES AS
+SELECT match_id, bowler, sum(batsman_runs) as runs, count(player_dismissed = batsman AND bowler=bowler AND dismissal_kind != 'run out') as wickets
+FROM deliveries group by match_id,bowler order by wickets desc;
