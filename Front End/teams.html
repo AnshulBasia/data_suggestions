@@ -19,59 +19,24 @@
             <li><a href="team_names.html">Get all teams</a></li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_id.php" method="post">
-                        Anime id: <input type="text" ng-model="id" name="id">
+                    <form action="matches_by_team.php" method="post">
+                        All matches of Team: <input type="text" ng-model="id" name="name">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_name.php" method="post">
-                        Anime name: <input type="text" ng-model="id" name="name">
+                    <form action="matches_by_winners.php" method="post">
+                        All matches where winner is: <input type="text" ng-model="id" name="winner">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
-                    <form action="anime_by_rating.php" method="post">
-                        Anime with rating greater than: <input type="text" ng-model="id" name="rating">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_ratingrange.php" method="post">
-                        Anime with rating range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_episodes.php" method="post">
-                        Anime with episodes range greater than: <input type="text" ng-model="id" name="low"> and lesser than: <input type="text" ng-model="id" name="high">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                <div ng-app="">
-                    <form action="anime_by_episodes_rating.php" method="post">
-                        Anime with episodes <br> greater than: <input type="text" ng-model="id" name="lowe"><br> lesser than: <input type="text" ng-model="id" name="highe"><br> rating<br> greater than
-                        <input type="text" ng-model="id" name="lowr"><br> less than
-                        <input type="text" ng-model="id" name="highr">
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </li>
-            <li>
-                INSERT ANIME
-                <div ng-app="">
-                    <form action="insert_anime.php" method="post">
-                        id: <input type="text" ng-model="id" name="id"><br> Name: <input type="text" ng-model="id" name="name"><br> Genre: <input type="text" ng-model="id" name="genre"><br>
+                    <form action="matches_by_venue.php" method="post">
+                        All matches At Venue : <input type="text" ng-model="id" name="venue">
                         <input type="submit" value="Submit">
                     </form>
                 </div>

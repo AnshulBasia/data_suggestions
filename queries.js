@@ -24,20 +24,14 @@ module.exports = {
 
     // movies
     getMovies: getMovies,
-    /*getAnimebyid: getAnimebyid,
-    getAnimebyname: getAnimebyname,
-    getAnimebyrating: getAnimebyrating,
-    getAnimebyratingrange: getAnimebyratingrange,
-    getAnimebyepisodes: getAnimebyepisodes,
-    getAnimebyepisodes_rating: getAnimebyepisodes_rating,
-    createanime: createanime*/
-    /*SAMPLES
-  getAllPuppies: getAllPuppies,
-  getSinglePuppy: getSinglePuppy,
-  createPuppy: createPuppy,
-  updatePuppy: updatePuppy,
-  removePuppy: removePuppy
-  */
+    getMoviebyname: getMoviebyname,
+    getMoviebyDirector: getMoviebyDirector,
+    getMoviebyActor: getMoviebyActor,
+    getMoviesbyBudget: getMoviesbyBudget,
+    getMoviesbyGross: getMoviesbyGross,
+    getMoviesbyRating: getMoviesbyRating,
+    createMovie: createMovie,
+
     // IPL
     getTeams: getTeams,
     getBatsmen: getBatsmen,
@@ -49,7 +43,10 @@ module.exports = {
     getBatsmenByAvg: getBatsmenByAvg,
     getBatsmenByStrikeRate: getBatsmenByStrikeRate,
     getBowlersByEcon: getBowlersByEcon,
-    getBowlersByAvg: getBowlersByAvg
+    getBowlersByAvg: getBowlersByAvg,
+    getMatchesByTeam: getMatchesByTeam,
+    getMatchesByVenue: getMatchesByVenue,
+    getMatchesByWinners: getMatchesByWinners
 };
 
 function getAnime(req, res, next) {
@@ -208,7 +205,127 @@ function getMovies(req, res, next) {
 
 }
 
+function getMoviebyname(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
+    db.any("select * from movies where movie_title = $1", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function getMoviebyDirector(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where director_name = $1", req.params.director)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function getMoviebyActor(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where actor_1_name = $1 or actor_2_name = $1 or actor_3_name = $1", req.params.actor)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function getMoviesbyBudget(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where budget >= $1 AND budget <= $2 order by budget desc", [req.params.low, req.params.high])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function getMoviesbyGross(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where gross >= $1 AND gross <= $2 order by gross desc", [req.params.low, req.params.high])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function getMoviesbyRating(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    db.any("select * from movies where imdb_score >= $1 AND imdb_score <= $2 order by imdb_score", [req.params.low, req.params.high])
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+function createMovie(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    //apid = api + name + "/" + genre + "/" + year + "/" + actor1+ "/" + actor2+ "/" + actor3+ "/" + imdb+ "/" + budget+ "/" + gross ;
+
+    db.none("insert into movies(movie_title, genres, title_year,director, actor_1_name, actor_2_name, actor_3_name, imdb_score, budget, gross)" +
+            "values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)", [req.params.name, req.params.genre, req.params.year, req.params.director, req.params.actor1, req.params.actor2, req.params.actor3, req.params.imdb, req.params.budget, req.params.gross])
+        .then(function() {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    message: 'Inserted one movie'
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
 
 //IPL Queries
 function getTeams(req, res, next) {
@@ -398,72 +515,53 @@ function getBowlersByEcon(req, res, next) {
 
 }
 
-/*SAMPLE QUERY functions
-function getAllPuppies(req, res, next) {
-  db.any('select * from pups')
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ALL puppies'
+function getMatchesByTeam(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from matches where team1 = $1 or team2 = $1 order by date", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+
 }
 
-
-
-function createPuppy(req, res, next) {
-  req.body.age = parseInt(req.body.age);
-  db.none('insert into pups(name, breed, age, sex)' +
-      'values(${name}, ${breed}, ${age}, ${sex})',
-    req.body)
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Inserted one puppy'
+function getMatchesByVenue(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from matches where city = $1 order by date", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+
 }
 
-function updatePuppy(req, res, next) {
-  db.none('update pups set name=$1, breed=$2, age=$3, sex=$4 where id=$5',
-    [req.body.name, req.body.breed, parseInt(req.body.age),
-      req.body.sex, parseInt(req.params.id)])
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Updated puppy'
+function getMatchesByWinners(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from matches where winner = $1 order by date", req.params.winner)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
 
-
-function removePuppy(req, res, next) {
-  var pupID = parseInt(req.params.id);
-  db.result('delete from pups where id = $1', pupID)
-    .then(function (result) {
-      
-      res.status(200)
-        .json({
-          status: 'success',
-          message: `Removed ${result.rowCount} puppy`
-        });
-      
-    })
-    .catch(function (err) {
-      return next(err);
-    });
 }
-*/

@@ -16,14 +16,13 @@ router.get('/api/insert_anime/:id/:name/:genre', db.createanime);
 
 //Movies
 router.get('/api/movies', db.getMovies);
-/*router.get('/api/movies/:id', db.getMovieById);
 router.get('/api/movies/name/:name', db.getMoviebyname);
-router.get('/api/movies/rating/:high', db.getMoviebyrating);
-router.get('/api/movies/rating/:high/:low', db.getAnimebyratingrange);
-router.get('/api/movies/episodes/:high/:low', db.getAnimebyepisodes);
-router.get('/api/movies/episodes_rating/:highe/:lowe/:highr/:lowr', db.getAnimebyepisodes_rating);
-router.get('/api/insert_movies/:id/:name/:genre', db.createanime);
-*/
+router.get('/api/movies/director/:director', db.getMoviebyDirector);
+router.get('/api/movies/actor/:actor', db.getMoviebyActor);
+router.get('/api/movies/budget/:low/:high', db.getMoviesbyBudget);
+router.get('/api/movies/gross/:low/:high', db.getMoviesbyGross);
+router.get('/api/movies/rating/:low/:high', db.getMoviesbyRating);
+router.get('/api/insert_movie/:name/:genre/:year/:director/:actor1/:actor2/:actor3/:imdb/:budget/:gross', db.createMovie);
 /*IPL api's*/
 
 router.get('/api/ipl/teams', db.getTeams);
@@ -37,6 +36,9 @@ router.get('/api/ipl/batsman/avg/:avg', db.getBatsmenByAvg);
 router.get('/api/ipl/batsman/strike_rate/:strike_rate', db.getBatsmenByStrikeRate);
 router.get('/api/ipl/bowler/avg/:avg', db.getBowlersByAvg);
 router.get('/api/ipl/bowler/econ/:econ', db.getBowlersByEcon);
+router.get('/api/ipl/teams/matches/:name', db.getMatchesByTeam);
+router.get('/api/ipl/venue/matches/:name', db.getMatchesByVenue);
+router.get('/api/ipl/winner/matches/:winner', db.getMatchesByWinners);
 
 /*router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);

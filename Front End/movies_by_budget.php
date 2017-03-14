@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 
-
 <html>
+    
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
-<head>
-    <title>Movies</title>
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-</head>
-
 <body>
-    <h2> Movie Titles</h2>
-    <div ng-app="myApp" ng-controller="myCtrl">
+    
+<h3 id="id"></h3>
+<div ng-app="myApp" ng-controller="myCtrl"> 
+
+
 
         <table>
             <tr>
@@ -38,18 +36,25 @@
                 <td>{{ x.gross }}</td>
             </tr>
         </table>
+</div>
 
-    </div>
 
-    <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function($scope, $http) {
-            $http.get("http://localhost:3000/api/movies").then(function(response) {
-                $scope.myData = response.data.data;
-            });
-        });
-    </script>
+
+<script>
+var app = angular.module('myApp', []);
+var budget_low = "<?php echo $_POST['budget_low']; ?>";
+var budget_high = "<?php echo $_POST['budget_high']; ?>";
+//name="V Kohli";
+var api = "http://localhost:3000/api/movies/budget/";
+var apid = api+budget_low+"/"+budget_high;
+
+document.getElementById("id").innerHTML = "Movies with budget in range "+budget_low+"-"+budget_high;
+app.controller('myCtrl', function($scope, $http) {
+  $http.get(apid).then(function (response) {
+      $scope.myData = response.data.data;
+  });
+});
+</script>
 
 </body>
-
 </html>

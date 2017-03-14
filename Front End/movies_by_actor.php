@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 
-
 <html>
+    
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
-<head>
-    <title>Movies</title>
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-</head>
-
 <body>
-    <h2> Movie Titles</h2>
-    <div ng-app="myApp" ng-controller="myCtrl">
+    
+<h3 id="id"></h3>
+<div ng-app="myApp" ng-controller="myCtrl"> 
 
-        <table>
+
+ <table>
             <tr>
                 <th>movie_title</th>
                 <th>title_year</th>
@@ -38,18 +35,24 @@
                 <td>{{ x.gross }}</td>
             </tr>
         </table>
+</div>
 
-    </div>
 
-    <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function($scope, $http) {
-            $http.get("http://localhost:3000/api/movies").then(function(response) {
-                $scope.myData = response.data.data;
-            });
-        });
-    </script>
+
+<script>
+var app = angular.module('myApp', []);
+var actor = "<?php echo $_POST['actor']; ?>";
+//name="V Kohli";
+var api = "http://localhost:3000/api/movies/actor/";
+var apid = api.concat(actor);
+
+document.getElementById("id").innerHTML = actor + " has worked in following movies"+ actor;
+app.controller('myCtrl', function($scope, $http) {
+  $http.get(apid).then(function (response) {
+      $scope.myData = response.data.data;
+  });
+});
+</script>
 
 </body>
-
 </html>
