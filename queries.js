@@ -51,7 +51,9 @@ module.exports = {
     getBowlersByAvg: getBowlersByAvg,
     getMatchesByTeam: getMatchesByTeam,
     getMatchesByVenue: getMatchesByVenue,
-    getMatchesByWinners: getMatchesByWinners
+    getMatchesByWinners: getMatchesByWinners,
+    getfavBatsmen: getfavBatsmen,
+    getfavBowler: getfavBowler
 };
 
 function getAnime(req, res, next) {
@@ -647,6 +649,40 @@ function getMatchesByWinners(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     db.any("select * from matches where winner = $1 order by date", req.params.winner)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getfavBatsmen(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from batsmen_matches where batsman = $1 order by runs desc", req.params.name)
+        .then(function(data) {
+            res.status(200)
+                .json({
+                    data: data,
+                });
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+
+}
+
+function getfavBowler(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    db.any("select * from BOWLERS_MATCHES where bowler = $1 order by wickets desc", req.params.name)
         .then(function(data) {
             res.status(200)
                 .json({

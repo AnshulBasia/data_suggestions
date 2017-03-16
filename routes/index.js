@@ -44,6 +44,8 @@ router.get('/api/ipl/bowler/econ/:econ', db.getBowlersByEcon);
 router.get('/api/ipl/teams/matches/:name', db.getMatchesByTeam);
 router.get('/api/ipl/venue/matches/:name', db.getMatchesByVenue);
 router.get('/api/ipl/winner/matches/:winner', db.getMatchesByWinners);
+router.get('/api/ipl/favbatsmen/:name', db.getfavBatsmen);
+router.get('/api/ipl/favbowler/:name', db.getfavBowler);
 
 /*router.get('/api/anime/:id', db.getAnimebyid);
 router.get('/api/anime/name/:name', db.getAnimebyname);

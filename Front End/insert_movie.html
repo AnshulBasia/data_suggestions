@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Data Suggestions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+               <h3> Insert Movie </h3>
+
+                <div ng-app="">
+                    <form action="insert_movie.php" method="post">
+                        Name: <input type="text" ng-model="id" name="name"><br> Genre: <input type="text" ng-model="id" name="genre"><br> year: <input type="text" ng-model="id" name="year"><br>director: <input type="text" ng-model="id" name="director"><br>                        actor1: <input type="text" ng-model="id" name="actor1"><br> actor2: <input type="text" ng-model="id" name="actor2"><br> actor3: <input type="text" ng-model="id" name="actor3"><br> imdb: <input type="text" ng-model="id" name="imdb"><br>                        budget: <input type="text" ng-model="id" name="budget"><br> gross: <input type="text" ng-model="id" name="gross"><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+</body>
+
+</html>
