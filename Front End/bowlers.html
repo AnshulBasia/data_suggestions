@@ -9,19 +9,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
 <body>
     <br>
     <br>
     <div class="container">
+        <center>
         <ul>
             <li><a href="allBowlers.html">All bowling statistics</a></li>
 
             <li>
                 <div ng-app="">
                     <form action="bowler_details.php" method="post">
-                        Bowler name: <input type="text" ng-model="id" name="name">
+                        Bowler name<br> <input type="text" ng-model="id" name="name"><br>
                         <input type="submit" value="Submit">
                     </form>
                 </div>
@@ -29,32 +31,32 @@
             <li>
                 <div ng-app="">
                     <form action="bowlers_by_wickets.php" method="post">
-                        Bowlers with Wickets greater than or equal to: <input type="text" ng-model="id" name="wickets">
-                        <input type="submit" value="Submit">
+                        Bowlers with Wickets greater than or equal to<br> <input type="text" ng-model="id" name="wickets">
+                        <br><input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
                     <form action="bowlers_by_avg.php" method="post">
-                        Bowlers with avg less than or equal to: <input type="text" ng-model="id" name="avg">
-                        <input type="submit" value="Submit">
+                        Bowlers with avg less than or equal to<br> <input type="text" ng-model="id" name="avg">
+                       <br> <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
                     <form action="bowlers_by_econ.php" method="post">
-                        Bowlers with econ less than or equal to: <input type="text" ng-model="id" name="econ">
-                        <input type="submit" value="Submit">
+                        Bowlers with econ less than or equal to<br> <input type="text" ng-model="id" name="econ">
+                       <br> <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
             <li>
                 <div ng-app="">
                     <form action="fav_bowler.php" method="post">
-                        Matches of your favourite Bowler: <input type="text" ng-model="id" name="fav_bowler">
-                        <input type="submit" value="Submit">
+                        Matches of your favourite Bowler<br> <input type="text" ng-model="id" name="fav_bowler">
+                       <br> <input type="submit" value="Submit">
                     </form>
                 </div>
             </li>
